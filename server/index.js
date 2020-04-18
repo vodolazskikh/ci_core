@@ -30,6 +30,13 @@ app.get("/notify-build-result", function (req, res) {
   console.log(log);
 });
 
+app.get("/kill-agent", function (req, res) {
+  const { host, port } = req.query;
+  const id = `${host}_${port}`;
+  agents[id] = undefined;
+  res.send(`Агент ${id} уничтожен`);
+});
+
 // Раз в минуту опрашиваем апи на предмет наличия билдов
 setTimeout(() =>
   axiosInstance

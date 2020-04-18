@@ -46,4 +46,16 @@ app.get("/build", function (req, res) {
   res.send(`Сборка ${id} запущена`);
 });
 
+// При отключении агента - сходим в сервер и уничтожим агент
+process.on("exit", () => {
+  axiosInstance
+    .get(
+      `http://${serverHost}:${serverPort}/kill-agent?host=${serverHost}&port=${port}`
+    )
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => console.log("Ошибка", err));
+});
+
 app.listen(port);
