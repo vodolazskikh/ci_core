@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "serverHost": "127.0.0.1",
+  "serverPort": 8080
+}
